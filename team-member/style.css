@@ -1,0 +1,99 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header Styling */
+header {
+    background-color: #0077b5;
+    color: white;
+    padding: 20px;
+    font-size: 24px;
+    text-transform: uppercase;
+}
+
+/* Team Container */
+.team-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 40px;
+}
+
+/* Team Member Card */
+.team-card {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Hover Effect */
+.team-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Profile Image */
+.team-card img {
+    width: 150px;  /* Increased image size */
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+    border: 4px solid #ddd;
+}
+
+/* Name Styling */
+.team-card h2 {
+    font-size: 22px;
+    margin: 10px 0;
+    color: #333;
+}
+
+/* Designation Styling */
+.team-card .designation {
+    font-size: 18px;
+    color: #555;
+    font-weight: bold;
+}
+
+/* Bio Styling */
+.team-card .bio {
+    font-size: 14px;
+    color: #666;
+    margin: 10px 0;
+}
+
+/* Social Media Icons */
+.social-icons {
+    margin-top: 15px;
+}
+
+.social-icons a {
+    margin: 5px;
+    color: #0077b5;
+    font-size: 24px;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: #005582;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .team-container {
+        flex-direction: column;
+        align-items: center;
+    }
+}
