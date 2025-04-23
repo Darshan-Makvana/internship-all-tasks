@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Form</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(45deg, #6a11cb, #2575fc);
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    form {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 450px;
+      padding: 30px;
+      position: relative;
+      animation: fadeIn 1s ease-out;
+      box-sizing: border-box;
+    }
+
+    form h2 {
+      text-align: center;
+      font-size: 28px;
+      margin-bottom: 20px;
+      color: #333;
+      letter-spacing: 0.5px;
+    }
+
+    label {
+      font-weight: bold;
+      margin-bottom: 5px;
+      display: block;
+      color: #444;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px 15px;
+      margin: 8px 0 16px 0;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      box-sizing: border-box;
+    }
+
+    input:focus, textarea:focus {
+      border-color: #2575fc;
+      box-shadow: 0 0 8px rgba(37, 117, 252, 0.6);
+      outline: none;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .buttons-container {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    button {
+      width: 48%;
+      background-color: #2575fc;
+      color: white;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #1e64d4;
+      transform: translateY(-3px);
+    }
+
+    button:active {
+      transform: translateY(1px);
+    }
+
+    .whatsapp-button {
+      background-color: #25D366;
+    }
+
+    .whatsapp-button:hover {
+      background-color: #128C7E;
+    }
+
+    .form-footer {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 14px;
+      color: #888;
+    }
+
+    .form-footer a {
+      color: #2575fc;
+      text-decoration: none;
+    }
+
+    .form-footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Animation for form appearance */
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: scale(0.8); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+
+  <form id="contactForm">
+    <h2>Contact Us</h2>
+    
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="user_name" placeholder="Your name" required>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="user_email" placeholder="Your email" required>
+
+    <label for="message">Message:</label>
+    <textarea id="message" name="message" placeholder="Your message" rows="5" required></textarea>
+    
+    <div class="buttons-container">
+      <!-- EmailJS button -->
+      <button type="submit">Send Message</button>
+      <!-- WhatsApp Button -->
+      <a href="https://wa.me/11234567890" target="_blank">
+        <button type="button" class="whatsapp-button">WhatsApp</button>
+      </a>
+    </div>
+
+    <div class="form-footer">
+      <p>Want to learn more? <a href="#">Visit our website</a></p>
+    </div>
+  </form>
+
+  <!-- EmailJS Library -->
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2.6.4/dist/email.min.js"></script>
+  <script>
+    // Initialize EmailJS with the provided Public Key
+    (function() {
+      emailjs.init("uz5JARQQikwCdR2pz"); // Your Public Key
+    })();
+
+    document.getElementById('contactForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const form = event.target;
+
+      emailjs.sendForm('service_g3nt87k', 'template_idfs5cq', form)
+        .then(() => {
+          alert('Message sent successfully!');
+          form.reset();
+        }, (error) => {
+          console.error('Failed to send message:', error);
+          alert('Failed to send message. Please try again later.');
+        });
+    });
+  </script>
+
+</body>
+</html>

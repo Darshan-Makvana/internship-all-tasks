@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movie Listing & Rating</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>/* Star Rating - Interactive */
+        .star {
+          color: #ccc;
+          transition: color 0.3s ease-in-out;
+          cursor: pointer;
+          font-size: 1.5rem;
+        }
+        
+        .star:hover,
+        .star:hover ~ .star,
+        .star.selected {
+          color: #ffd700; /* Gold */
+        }
+        
+        /* Movie Card - Enhanced */
+        .movie-container {
+          background: linear-gradient(135deg, #1e3a8a, #2563eb);
+          border-radius: 10px;
+          padding: 15px;
+          text-align: center;
+          position: relative;
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .movie-container:hover {
+          transform: scale(1.05);
+          box-shadow: 0px 4px 10px rgba(255, 215, 0, 0.3);
+        }
+        
+        /* Movie Description - Better Visibility */
+        .movie-description {
+          visibility: hidden;
+          opacity: 0;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          background: rgba(0, 0, 0, 0.8);
+          color: #fff;
+          padding: 12px;
+          border-radius: 8px;
+          width: 80%;
+          text-align: center;
+          transition: opacity 0.3s ease-in-out, visibility 0s linear 0.3s;
+        }
+        
+        .movie-container:hover .movie-description {
+          visibility: visible;
+          opacity: 1;
+          transition-delay: 0s;
+        }
+        
+        /* Header - Stylish Look */
+        header {
+          background: linear-gradient(90deg, #1e40af, #1e3a8a);
+          padding: 12px;
+          box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Genre Filter Dropdown - Improved */
+        #genre-filter {
+          background: #1e3a8a;
+          color: #f8fafc;
+          border: 1px solid #2563eb;
+          padding: 8px;
+          border-radius: 5px;
+          cursor: pointer;
+        }
+        
+        #genre-filter:hover {
+          background: #2563eb;
+        }
+        
+        #genre-filter:focus {
+          outline: none;
+          box-shadow: 0px 0px 8px rgba(255, 215, 0, 0.6);
+        }
+        
+    </style>
+  </head>
+  <body class="bg-blue-900 text-gray-100">
+    <header class="bg-blue-800 py-4 shadow-md">
+      <div class="container mx-auto px-4 flex justify-between items-center">
+        <h1 class="text-3xl font-bold text-yellow-400">Movie Listing & Rating</h1>
+        <nav>
+          <ul class="flex space-x-4">
+            <li><a href="#" class="text-gray-200 hover:text-yellow-300">Home</a></li>
+            <li><a href="#" class="text-gray-200 hover:text-yellow-300" onclick="displayTopRated()">Top Rated</a></li>
+            <li>
+              <select id="genre-filter" class="text-gray-200 bg-blue-700 border border-blue-600 p-2 rounded focus:outline-none" onchange="filterMovies()">
+                <option value="all">All Genres</option>
+                <option value="Sci-Fi">Sci-Fi</option>
+                <option value="Action">Action</option>
+                <option value="Comedy">Comedy</option>
+                <option value="Romance">Romance</option>
+                <option value="Superhero">Superhero</option>
+                <option value="Drama">Drama</option>
+                <option value="Crime">Crime</option>
+                <option value="Musical">Musical</option>
+              </select>
+            </li>
+            <li><a href="#" class="text-gray-200 hover:text-yellow-300">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+ 
+    <div class="container mx-auto px-4 py-8">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="movie-list"></div>
+    </div>
+ 
+    <script>
+      const movies = [
+        {title: "Inception", genre: "Sci-Fi", year: 2010, image: "https://m.media-amazon.com/images/I/71thFiIUSpL._AC_UF894,1000_QL80_.jpg", rating: 4.5, votes: 1, description: "A thief enters dreams to steal secrets."},
+        {title: "Sholay", genre: "Action", year: 1975, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnpGSJsLAVPDjuDjsZ52tk7VGWhj1eeVp8vA&s", rating: 4.9, votes: 1, description: "Classic Indian action film."},
+        {title: "The Godfather", genre: "Crime", year: 1972, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhrLnQk54q2G0AG3-jzTALVBvcu1FDrmSudw&s", rating: 4.9, votes: 1, description: "A mafia boss passes on his legacy to his son."},
+        {title: "Interstellar", genre: "Sci-Fi", year: 2014, image: "https://saichintala.com/wp-content/uploads/2014/11/interstellar-3.jpg", rating: 4.8, votes: 1, description: "A journey beyond the stars."},
+        {title: "Titanic", genre: "Romance", year: 1997, image: "https://platform.vox.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/9874701/titaniccover.jpg", rating: 4.6, votes: 1, description: "A tragic love story on a doomed ship."},
+        {title: "Avengers: Endgame", genre: "Superhero", year: 2019, image: "https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/DB176BD1488D7E4822256EF1778C124FC17388FC1E7F0F6D89B38AFF5FB001F6/scale?width=1200&aspectRatio=1.78&format=webp", rating: 4.7, votes: 1, description: "The ultimate superhero showdown."},
+        {title: "Dangal", genre: "Drama", year: 2016, image: "https://images.indianexpress.com/2017/06/dangal-7591.jpg?w=389", rating: 4.6, votes: 1, description: "A father trains his daughters for wrestling glory."},
+        {title: "Forrest Gump", genre: "Drama", year: 1994, image: "https://m.media-amazon.com/images/M/MV5BNDYwNzVjMTItZmU5YS00YjQ5LTljYjgtMjY2NDVmYWMyNWFmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg", rating: 4.8, votes: 1, description: "The extraordinary life of a man with a simple heart."},
+        {title: "The Matrix", genre: "Sci-Fi", year: 1999, image: "https://www.rogerebert.com/wp-content/uploads/2024/03/The-Matrix.jpg", rating: 4.8, votes: 1, description: "A hacker learns that reality is an illusion."},
+        {title: "Gladiator", genre: "Action", year: 2000, image: "https://cdn.theasc.com/_1200x630_crop_center-center_82_none/Gladiator-Featured-crop.jpg?mtime=1683006286", rating: 4.7, votes: 1, description: "A betrayed Roman general seeks revenge."},
+        {title: "Fight Club", genre: "Drama", year: 1999, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQE5rkKTG2JFWq_FiFZnIkDhQ_ZPqYAPHYqAw&s", rating: 4.7, votes: 1, description: "A man forms an underground fight club."},
+        {title: "La La Land", genre: "Musical", year: 2016, image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEioLu3Eo-ylOCMwiGYEtgtH2b21PSRPDdjkpeyMxxay0ElbwaemNGE7eXdHSYoxvm92F2ZdB3RjhDv5z_W4Gor8dwgmc_qRIGR6n_7neKYaYbKsW40szTnSVe2gKzwCcVZLQMAxjNB7ZSv-b7dbMr0f-nxQSRmTAryYYvwni9rogOjae74/w1200-h630-p-k-no-nu/0.jpg", rating: 4.6, votes: 1, description: "A jazz musician and an aspiring actress fall in love."},
+        {title: "Pulp Fiction", genre: "Crime", year: 1994, image: "https://static1.cbrimages.com/wordpress/wp-content/uploads/2024/08/vincent-mia-and-jules-in-pulp-fiction.jpg", rating: 4.8, votes: 1, description: "The lives of several characters intertwine in a non-linear narrative."},
+        {title: "The Dark Knight", genre: "Action", year: 2008, image: "https://m.media-amazon.com/images/M/MV5BMjA5ODU3NTI0Ml5BMl5BanBnXkFtZTcwODczMTk2Mw@@._V1_QL75_UX513_.jpg", rating: 4.9, votes: 1, description: "Batman faces Joker in Gotham."},
+        {title: "Joker", genre: "Drama", year: 2019, image: "https://sm.ign.com/t/ign_nordic/review/j/joker-revi/joker-review_zf38.1024.jpg", rating: 4.7, votes: 1, description: "A mentally troubled comedian's descent into madness."},
+        {title: "Parasite", genre: "Thriller", year: 2019, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOH3R0DeO5OFi95Q1SbpbOTB4oBZQ6zuyymQ&s", rating: 4.8, votes: 1, description: "A poor family infiltrates a wealthy household."},
+        {title: "The Shawshank Redemption", genre: "Drama", year: 1994, image: "https://m.media-amazon.com/images/I/51NiGlapXlL.jpg", rating: 5.0, votes: 1, description: "A man wrongly imprisoned forms an unlikely friendship."},
+        {title: "Casablanca", genre: "Romance", year: 1942, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwqG0nWaNLQbUKHUHl-75DuA0tNJbSr-U8-w&s", rating: 4.9, votes: 1, description: "A love story set during World War II."},
+        {title: "Goodfellas", genre: "Crime", year: 1990, image: "https://resizing.flixster.com/BzcbIq6ZM1zV2_5QaRCq0fpCDTY=/fit-in/705x460/v2/https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p12720_v_h9_af.jpg", rating: 4.8, votes: 1, description: "The rise and fall of a mob associate."}
+      ];
+ 
+      // Display the movies along with their star ratings.
+      function displayMovies(filteredMovies = movies) {
+        const movieList = document.getElementById("movie-list");
+        movieList.innerHTML = "";
+        filteredMovies.forEach((movie, index) => {
+          movieList.innerHTML += `
+            <div class="movie-container bg-blue-800 p-4 rounded-lg text-center shadow-lg relative">
+              <img src="${movie.image}" alt="${movie.title}" class="w-full h-48 object-cover rounded-lg mb-2">
+              <h2 class="text-xl font-semibold">${movie.title}</h2>
+              <p class="text-gray-300">${movie.genre} | ${movie.year}</p>
+              <p class="text-sm text-gray-300 italic mt-1">
+                Avg Rating: ${movie.rating.toFixed(1)} (${movie.votes} vote${movie.votes > 1 ? 's' : ''})
+              </p>
+              <!-- Star Rating Display -->
+              <div class="star-rating mb-2">
+                ${generateStars(Math.round(movie.rating), index)}
+              </div>
+              <div class="movie-description">${movie.description}</div>
+            </div>
+          `;
+        });
+      }
+ 
+      // Generates the star icons based on the movie's rating.
+      function generateStars(rating, index) {
+        let stars = "";
+        for (let i = 1; i <= 5; i++) {
+          stars += `<span class="text-2xl cursor-pointer star" data-index="${index}" data-rating="${i}" onclick="rateMovie(${index}, ${i})">${i <= rating ? "★" : "☆"}</span>`;
+        }
+        return stars;
+      }
+ 
+      // Updates the movie's rating based on the clicked star.
+      function rateMovie(index, rating) {
+        let movie = movies[index];
+        // Calculate the new average rating.
+        movie.rating = (movie.rating * movie.votes + rating) / (movie.votes + 1);
+        movie.votes++;
+        displayMovies();
+      }
+ 
+      function filterMovies() {
+        const genre = document.getElementById("genre-filter").value;
+        if (genre === "all") {
+          displayMovies(movies);
+        } else {
+          const filteredMovies = movies.filter(movie => movie.genre === genre);
+          displayMovies(filteredMovies);
+        }
+      }
+ 
+      function displayTopRated() {
+        const topRatedMovies = movies.filter(movie => movie.rating > 4.7);
+        displayMovies(topRatedMovies);
+      }
+ 
+      // Initial call to display all movies.
+      displayMovies();
+    </script>
+  </body>
+</html>
+ 
