@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email and WhatsApp Integration</title>
+  <style>
+    body {
+      font-family: 'Roboto', Arial, sans-serif;
+      margin: 20px;
+      background-color: #eaeef3;
+      color: #333;
+    }
+    form {
+      max-width: 500px;
+      margin: auto;
+      background: #ffffff;
+      padding: 25px;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      margin: 15px 0;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 16px;
+      background-color: #f8f9fa;
+      transition: border-color 0.3s;
+    }
+    input:focus, textarea:focus {
+      border-color: #007BFF;
+      outline: none;
+    }
+    button {
+      background-color: #28a745;
+      color: white;
+      padding: 12px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #218838;
+    }
+    .whatsapp-button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 20px auto;
+      max-width: 500px;
+    }
+    .whatsapp-button a {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      background-color: #25D366;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+    .whatsapp-button a:hover {
+      background-color: #1da851;
+    }
+    .whatsapp-button img {
+      width: 24px;
+      height: 24px;
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <form id="contactForm">
+    <h2>Contact Us</h2>
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="user_name" placeholder="Your name" required>
+    
+    <label for="phone">Phone Number:</label>
+    <input type="tel" id="phone" name="user_phone" placeholder="Your phone number" required>
+    
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="user_email" placeholder="Your email" required>
+    
+    <label for="message">Message:</label>
+    <textarea id="message" name="message" placeholder="Your message" rows="5" required></textarea>
+    
+    <button type="submit">Submit via Email</button>
+  </form>
+
+  <div class="whatsapp-button">
+    <a id="whatsappLink" target="_blank">
+      <img 
+        src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" 
+        alt="WhatsApp Logo">
+      Send via WhatsApp
+    </a>
+  </div>
+
+  <!-- EmailJS Library -->
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2.6.4/dist/email.min.js"></script>
+  <script>
+    // Initialize EmailJS with the provided Public Key
+    (function() {
+      emailjs.init("uz5JARQQikwCdR2pz");
+    })();
+
+    // Handle EmailJS Form Submission
+    document.getElementById('contactForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const form = event.target;
+
+      emailjs.sendForm('service_g3nt87k', 'template_idfs5cq', form)
+        .then(() => {
+          alert('Message sent successfully via email!');
+          form.reset();
+        }, (error) => {
+          console.error('Failed to send message via email:', error);
+          alert('Failed to send message via email. Please try again later.');
+        });
+    });
+
+// Update WhatsApp Button Link Dynamically
+const whatsappLink = document.getElementById('whatsappLink');
+document.getElementById('contactForm').addEventListener('input', function() {
+  const name = document.getElementById('name').value;
+  const phone = document.getElementById('phone').value;
+  const message = document.getElementById('message').value;
+
+  // Set WhatsApp link with pre-filled message
+  const phoneNumber = "8767350150"; // Replace with your WhatsApp number
+  const whatsappMessage = `Hello, my name is ${encodeURIComponent(name)}. My phone number is ${encodeURIComponent(phone)}. ${encodeURIComponent(message)}`;
+  
+  // Dynamically update the WhatsApp button with the proper link
+  whatsappLink.href = `https://wa.me/${phoneNumber}?text=${whatsappMessage}`;
+});
+
+  </script>
+</body>
+</html>
