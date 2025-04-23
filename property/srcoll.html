@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Land & Property Sales</title>
+  <style>
+    /* Smooth Scrolling */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* General Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Navigation Bar Styles */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: #333;
+      color: white;
+      padding: 10px 0;
+      z-index: 1000;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 14px 20px;
+      display: inline-block;
+      text-align: center;
+    }
+
+    nav a:hover {
+      background-color: #444;
+    }
+
+    /* Section Styling */
+    section {
+      padding: 100px 20px;
+      text-align: center;
+      min-height: 100vh;
+    }
+
+    /* Hero Section */
+    #home {
+      background: url('https://source.unsplash.com/1600x900/?land') no-repeat center center;
+      background-size: cover;
+      color: white;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    #home h1 {
+      font-size: 50px;
+    }
+
+    #home button {
+      padding: 15px 30px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      font-size: 18px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    #home button:hover {
+      background-color: #2980b9;
+    }
+
+    /* Section Titles */
+    section h2 {
+      font-size: 40px;
+      margin-bottom: 20px;
+    }
+
+    /* Gallery Section */
+    #gallery .gallery-images {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    #gallery .gallery-images img {
+      width: 300px;
+      margin: 10px;
+      border-radius: 5px;
+    }
+
+    /* Services Section */
+    #services .service-item {
+      margin: 20px;
+      display: inline-block;
+      width: 30%;
+      text-align: center;
+    }
+
+    #services .service-item img {
+      width: 100%;
+      border-radius: 5px;
+    }
+
+    #services .service-item h3 {
+      font-size: 24px;
+      margin-top: 10px;
+    }
+
+    /* Contact Form Section */
+    #contact input, #contact textarea {
+      width: 80%;
+      padding: 12px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    #contact button {
+      padding: 15px 30px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      font-size: 18px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    /* Testimonials Section */
+    #testimonials .testimonial {
+      display: inline-block;
+      width: 30%;
+      padding: 20px;
+      margin: 10px;
+      background-color: #f9f9f9;
+      border-radius: 5px;
+    }
+
+    #testimonials .testimonial h3 {
+      margin-top: 10px;
+      font-size: 24px;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      background-color: #333;
+      color: white;
+      padding: 20px 0;
+    }
+
+    /* Buttons Styling */
+    button, .scroll-btn {
+      background-color: #3498db;
+      color: white;
+      padding: 15px 30px;
+      font-size: 18px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+    }
+
+    button:hover, .scroll-btn:hover {
+      background-color: #2980b9;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#services">Services</a>
+    <a href="#about">About Us</a>
+    <a href="#contact">Contact</a>
+    <a href="#blogs">Blogs</a>
+    <a href="#testimonials">Testimonials</a>
+  </nav>
+
+  <!-- Home Section -->
+  <section id="home">
+    <h1>Land & Property Sales</h1>
+    <p>Find Your Dream Property and Land</p>
+    <button class="scroll-btn" onclick="window.location.href='#services'">Explore Our Services</button>
+  </section>
+
+  <!-- Gallery Section -->
+  <section id="gallery" style="background-color: #f8f8f8;">
+    <h2>Gallery</h2>
+    <div class="gallery-images">
+      <img src="https://source.unsplash.com/300x200/?land,property" alt="Plot 1">
+      <img src="https://source.unsplash.com/300x200/?real-estate,landscape" alt="Plot 2">
+      <img src="https://source.unsplash.com/300x200/?land,real-estate" alt="Plot 3">
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services">
+    <h2>Our Services</h2>
+    <div class="service-item">
+      <img src="https://source.unsplash.com/300x200/?property" alt="Land Sales">
+      <h3>Land Sales</h3>
+      <p>We help you buy and sell prime land plots in the best locations.</p>
+    </div>
+    <div class="service-item">
+      <img src="https://source.unsplash.com/300x200/?consulting" alt="Consultation">
+      <h3>Consultation</h3>
+      <p>Get expert advice on the best investment opportunities in land and properties.</p>
+    </div>
+    <div class="service-item">
+      <img src="https://source.unsplash.com/300x200/?law" alt="Legal Assistance">
+      <h3>Legal Assistance</h3>
+      <p>Ensure your transactions are smooth with our legal services.</p>
+    </div>
+    <button class="scroll-btn" onclick="window.location.href='#about'">Learn More About Us</button>
+  </section>
+
+  <!-- About Us Section -->
+  <section id="about" style="background-color: #f8f8f8;">
+    <h2>About Us</h2>
+    <p>We are a leading real estate agency offering premium land and property solutions for both buyers and sellers. Our team is dedicated to helping you find the ideal land or property investment, whether you're looking to build your dream home or secure a great investment opportunity.</p>
+  </section>
+
+  <!-- Blogs Section -->
+  <section id="blogs">
+    <h2>Our Latest Blogs</h2>
+    <article>
+      <h3>Why Invest in Land</h3>
+      <p>Land is one of the safest investments you can make. Learn why...</p>
+    </article>
+    <article>
+      <h3>Tips for Buying Property</h3>
+      <p>Discover some valuable tips that will guide you through the property buying process...</p>
+    </article>
+    <button class="scroll-btn" onclick="window.location.href='#contact'">Contact Us Now</button>
+  </section>
+
+  <!-- Contact Form Section -->
+  <section id="contact" style="background-color: #f8f8f8;">
+    <h2>Contact Us</h2>
+    <form action="#">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+      <button type="submit" class="scroll-btn">Send Message</button>
+    </form>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section id="testimonials">
+    <h2>What Our Clients Say</h2>
+    <div class="testimonial">
+      <h3>John Doe</h3>
+      <p>"The best place to find real estate! Excellent service and smooth transactions!"</p>
+    </div>
+    <div class="testimonial">
+      <h3>Jane Smith</h3>
+      <p>"I found the perfect land for my new project. Highly recommend this company!"</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Land & Property Sales | <a href="privacy.html" style="color: white;">Privacy Policy</a> | <a href="terms.html" style="color: white;">Terms & Conditions</a></p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,149 @@
+1) Which methodology is used to performed Maintenance testing?
+
+a. Breadth test and depth test
+b. Confirmation testing
+c. Retesting
+d. Sanity testing
+
+Answer: (a) Breadth test and depth test
+
+Explanation: The maintenance testing is performed during the development, migration, and modification cycle. It is done on the previously deployed software where its needs to be improved, altered or migrated to other hardware.
+
+2)Which of the following testing is also known as white-box testing?
+
+a. Structural testing
+b. Error guessing technique
+c. Design based testing
+d. None of the above
+
+Answer: (a) Structural Testing
+
+Explanation: Structural testing is also known as a White box or Clear box, or Glass box testing. In structural testing, we can understand what is happening inside the application or the software.
+
+3) What is smallest unit of the information?
+
+a. A bit
+b. A byte
+c. A block
+d. A nibble
+
+Answer: (a) A bit
+
+Explanation: The smallest unit of the information is a bit. All information is stored in the computer as bits.
+
+4) Which of the following tool is not an open-source tool?
+
+a. Cucumber
+b. Selenium
+c. Bugzilla
+d. BugHost
+
+Answer: (d) BugHost
+
+Explanation: BugHost is another defect tracking tool that provides a bug tracking solutions to thousands of customers worldwide in all major business areas. It uses a workflow process by allowing us to allocate bugs to different users within our team.
+
+5)Which of the following testing technique can be used in order to determine the validation test?
+
+a. Black-box Testing
+b. White-box Testing
+c. Yellow- box Testing
+d. All of the above
+
+Answer: (a) Black-box Testing
+
+Explanation: Black-box testing is a process of checking an application's functionality as per the customer requirement. Or in other words, we can say that verifying the functionality against requirement specifications is referred as black-box testing.
+
+6)Ready the Query carefully:
+
+SELECT emp_name  
+FROM department  
+WHERE dept_name LIKE ' _____ Computer Science';  
+In the above-given Query, which of the following can be placed in the Query's blank portion to select the "dept_name" that also contains Computer Science as its ending string?
+
+a. &
+b. _
+c. %
+d. $
+
+Answer: C
+
+Explanation: In the above-given Query, the "%" (like) operator will be used, which is generally used while searching for a certain pattern in the strings. It represents the single and multiple characters. In this case, it used with "Where "louse to select the "dept_name" that contains the Computer Since as its ending string. To understand it more clearly, consider the following syntax:
+
+Syntax
+
+SELECT column1, column2, ...
+FROM table_name
+WHERE columnN LIKE pattern;
+
+7)Who is known as the -Father of AI"?
+
+a. Fisher Ada
+b. Alan Turing
+c. John McCarthy
+d. Allen Newell
+
+Answer: c. John McCarthy
+
+Explanation: John McCarthy was a pioneer in the AI field and known as the father of Artificial intelligence. He was not only the known as the father of AI but also invented the term Artificial Intelligence.
+
+8)Which of the following statements is correct about the formal parameters in C++?
+
+a. Parameters with which functions are called
+b. Parameters which are used in the definition of the function
+c. Variables other than passed parameters in a function
+d. Variables that are never used in the function
+
+Answer: A
+
+Explanation: Parameters that are used in the body of the function are known as formal parameters. These parameters represent the parameters passed to the function and are only used inside the function's body.
+
+9)Which one of the following also known as Conditional Expression:
+
+a. Alternative to if-else
+b. Switch statement
+c. If-then-else statement
+d. immediate if
+
+Answer: D
+
+Explanation: A conditional expression can only evaluate two things, which either true or false, that are purely based on the evaluation of the condition
+
+10)In which year was the Python language developed?
+
+a. 1995
+b. 1972
+c. 1981
+d. 1989
+
+Answer: (d) 1989
+
+Explanation: Python language was developed by Guido van Rossum in 1989.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
